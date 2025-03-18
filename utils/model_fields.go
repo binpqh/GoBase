@@ -29,14 +29,12 @@ func registerModel(model interface{}) {
 	modelFieldCache.Store(t.Name(), fieldMap)
 }
 
-func GetField(model interface{}, fieldName string) string {
-	t := reflect.TypeOf(model)
+func GetFields[T any]() map[string]string {
+	t := reflect.TypeOf((*T)(nil)).Elem()
 	if fields, ok := modelFieldCache.Load(t.Name()); ok {
 		if fieldMap, ok := fields.(map[string]string); ok {
-			if column, exists := fieldMap[fieldName]; exists {
-				return column
-			}
+			return fieldMap
 		}
 	}
-	panic("Field not found: " + fieldName)
+	panic("Fields not found for model: " + t.Name())
 }

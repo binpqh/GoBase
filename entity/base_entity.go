@@ -11,3 +11,11 @@ type Entity[TKey any, TUserId any] struct {
 	DeletedBy TUserId   `json:"deleted_by"`
 	CreatedBy TUserId   `json:"created_by"`
 }
+
+type IEntity[TKey any, TUserId any] interface {
+	GetID() TKey
+}
+
+func (e *Entity[TKey, TUserId]) GetID() TKey {
+	return e.ID
+}

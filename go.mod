@@ -1,3 +1,3 @@
-module github.com/binpqh/gobase
+module github.com/binpqh/GoBase
 
 go 1.23.6
